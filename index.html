@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<head>
+  <meta charset="utf-8">
+  <title>Adept</title>
+  <script src="js/jQuery.js"></script>
+  <meta name="viewport" content="width=device-width">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans'
+  rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="register-container">
+        <p>
+            <a href="register.html">REGISTER</a>
+        </p>
+    </div>
+    <div id="headercontainer" class="container">
+        <div id="headerrow" class="row">
+            <a href="index.html">
+                <img id="headerimage" src="img/websitebanner.png">
+            </a>
+        </div>
+    </div>
+    <div id="navcontainer"class="container">
+        <div id="navbar" class="row">
+            <div class="col-sm-3">
+                <h2><a href="index.html">HOME</a></h2>
+            </div>
+            <div class="col-sm-3">
+                <h2><a href="music.html">MUSIC</a></h2>
+            </div>
+            <div class="col-sm-3">
+                <h2><a href="http://www.impericon.com/uk/adept.html">
+                    MERCH</a></h2>
+            </div>
+            <div class="col-sm-3">
+                <h2><a href="about.html">ABOUT</a></h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <img class="slideshow-img" src="img/slideshow/slide1.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide2.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide3.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide4.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide5.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide6.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide7.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide8.jpg">
+        <img class="slideshow-img" src="img/slideshow/slide9.jpg">
+    </div>
+    <script type="text/javascript">
+        //not sure which of these to use, both achieve the same thing
+        //both have ups and downs
+
+        //neater but slideIndex continues incrementing forever (may slow down performance in the long run??? not sure)
+        // var slideIndex = 0;
+        // slideshow(slideIndex++);
+        // setInterval("slideshow(slideIndex++)", 4000);
+        //
+        // function slideshow(slideIndex){
+        //     //creates an array of all slides
+        //     var slides = $(".slideshow-img");
+        //     //fades the previous image out
+        //     $(slides[(slideIndex-1)%slides.length]).fadeOut(1000);
+        //     /*shifts slideIndex back into the appropriate value
+        //     for the 'loop'*/
+        //     slideIndex = slideIndex%slides.length;
+        //     $(slides[slideIndex]).fadeIn(1000);
+        //     return;
+        // }
+
+
+        //technically better/more stable but messier and uses an object rather than a number, may slow down performance
+        //update to above: since the object isn't copied and it's passed by reference (the reason using an object works),
+        //there is a negligable performance lost
+        var slideIndex = {value: 0};
+        slideshow(slideIndex);
+        setInterval("slideshow(slideIndex)", 4000);
+
+        function slideshow(slideIndex){
+            //creates an array of all slides
+            var slides = $(".slideshow-img");
+            $(slides[slideIndex.value-1]).fadeOut(1000);
+            //keeps slideIndex below the maximum number of slides
+            slideIndex.value = slideIndex.value%slides.length;
+            $(slides[slideIndex.value]).fadeIn(1000);
+            slideIndex.value++;
+            return;
+        }
+    </script>
+</body>
+</html>
